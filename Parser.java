@@ -14,8 +14,8 @@ public class Parser {
                 String caller = line.substring(line.indexOf('@')+1,line.indexOf('('));
                 for(line = sc.nextLine(); !line.contains("}"); line = sc.nextLine()) {
                     if(line.contains("@")) {
-                        if(line.contains("call ")) graph.add(new Edge(caller, line.substring(line.indexOf('@')+1, line.indexOf('(', line.indexOf('@')))));
-                        else graph.add(new Edge(caller, line.substring(line.indexOf('@')+1, line.indexOf(',', line.indexOf('@')))));
+                        if(line.contains("call ")) graph.add(new Edge(caller, line.substring(line.indexOf('@')+1, line.indexOf('(', line.indexOf('@'))), ReferenceType.CALL));
+                        else graph.add(new Edge(caller, line.substring(line.indexOf('@')+1, line.indexOf(',', line.indexOf('@'))), ReferenceType.READ));
                     }
                 }
             }
