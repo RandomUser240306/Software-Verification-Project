@@ -1,3 +1,5 @@
+package src;
+
 public class Edge {
         public String from, to;
         public ReferenceType type;

@@ -1,3 +1,5 @@
+package src;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +10,8 @@ import java.util.Map;
 
 public class Accesses {
     public static Map<String, Map<String, Integer>> getAccesses() throws FileNotFoundException {
-        CallGraph graph = Parser.parseLLVM("RTOS_Lab4.ll");
-        CallGraph osGraph = Parser.parseLLVM("OS.ll");
+        CallGraph graph = Parser.parseLLVM();
+        CallGraph osGraph = Parser.parseLLVM();
         graph.startingPoints.addAll(osGraph.startingPoints);
         graph.references.addAll(osGraph.references);
         List<Edge> edges = graph.references;
@@ -50,13 +52,16 @@ public class Accesses {
         for(int i=0; i<nodes.size(); i++) {
             if(nodes.get(i).contains("#data")) {
                 possibleAccesses.put(nodes.get(i), new HashMap<String, Integer>());
-                // System.out.println("Memory Location: " + nodes.get(i).substring(5));
-                // System.out.println("Starting Points:");
+                 System.out.println("Memory Location: " + nodes.get(i).substring(5));
+                 System.out.println("Starting Points:");
                 for(String startingPoint : graph.startingPoints) {
                     int j = nodes.indexOf(startingPoint);
                     if(j<0) continue;
                     if(reachableLocations.get(j).get(i)>0) {
-                        // System.out.println("\t" + nodes.get(j) + " - Read");
+                        if(reachableLocations.get(j).get(i)==1)
+                            System.out.println("\t" + nodes.get(j) + " - Read");
+                        else 
+                            System.out.println("\t" + nodes.get(j) + " - Write");
                         possibleAccesses.get(nodes.get(i)).put(startingPoint, reachableLocations.get(j).get(i));
                     }
                 }

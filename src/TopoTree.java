@@ -1,3 +1,5 @@
+package src;
+
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -128,7 +130,7 @@ public class TopoTree {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        List<Edge> edges = Parser.parseLLVM("OS.ll").references;
+        List<Edge> edges = Parser.parseLLVM().references;
 
         Map<String, List<Edge>> graph = new HashMap<>();
         Map<String, Integer> indegree = new HashMap<>();

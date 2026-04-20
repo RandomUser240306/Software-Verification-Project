@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,7 +52,7 @@ public class DisplayGraph {
         SwingUtilities.invokeLater(() -> {
             List<Edge> graph = new ArrayList<>();
             try {
-                graph = Parser.parseLLVM("OS.ll").references;
+                graph = Parser.parseLLVM().references;
             } catch (FileNotFoundException ex) {
                 System.getLogger(DisplayGraph.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
