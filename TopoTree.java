@@ -128,7 +128,7 @@ public class TopoTree {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        List<Edge> edges = Parser.parseLLVM("OS.ll");
+        List<Edge> edges = Parser.parseLLVM("OS.ll").references;
 
         Map<String, List<Edge>> graph = new HashMap<>();
         Map<String, Integer> indegree = new HashMap<>();

@@ -50,7 +50,7 @@ public class DisplayGraph {
         SwingUtilities.invokeLater(() -> {
             List<Edge> graph = new ArrayList<>();
             try {
-                graph = Parser.parseLLVM("OS.ll");
+                graph = Parser.parseLLVM("OS.ll").references;
             } catch (FileNotFoundException ex) {
                 System.getLogger(DisplayGraph.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }

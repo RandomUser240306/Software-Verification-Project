@@ -24,8 +24,13 @@ public class Reachable {
 
                     // Check if a path exists between i to k and 
                     // between k to j.
-                    if (ans.get(i).get(k) == 1 && ans.get(k).get(j) == 1) {
-                        ans.get(i).set(j, 1);
+                    if (ans.get(i).get(k) >= 1 && ans.get(k).get(j) >= 1) {
+                        if(ans.get(i).get(k) == 2 || ans.get(k).get(j) == 2)
+                        {
+                            ans.get(i).set(j, 2);
+                        } else {
+                            ans.get(i).set(j, 1);
+                        }
                     }
                 }
             }
