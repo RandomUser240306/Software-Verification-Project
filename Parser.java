@@ -15,7 +15,7 @@ public class Parser {
             if(line.contains("define")) {
                 String caller = line.substring(line.indexOf('@')+1,line.indexOf('('));
                 if(caller.contains("Handler")) starts.add(caller);
-                for(line = sc.nextLine(); !line.contains("}"); line = sc.nextLine()) {
+                for(line = sc.nextLine(); !line.equals("}"); line = sc.nextLine()) {
                     if(line.contains("@")) {
                         if(line.contains("call ")) {
                             if((line.contains("@OS_AddThread") || line.contains("@OS_AddPeriodicThread") || line.contains("@OS_AddS2Task") || line.contains("@OS.AddS1Task") || line.contains("@OS.AddPA28Task")) && !line.contains("ptr noundef %"))
@@ -28,6 +28,7 @@ public class Parser {
                 }
             }
         }
+        starts.add("main"); //duh
         System.out.println(starts.toString());
         return new CallGraph(starts, graph);
     }
