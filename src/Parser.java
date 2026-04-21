@@ -35,7 +35,7 @@ public class Parser {
                     }
                 }
                 starts.add("main"); //duh
-                System.out.println(starts.toString());
+                // System.out.println(starts.toString());
             }
         }
         return new CallGraph(starts, graph);

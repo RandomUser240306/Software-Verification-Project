@@ -7,33 +7,27 @@ target triple = "thumbv6m-ti-none-eabi"
 
 ; Function Attrs: noinline nounwind null_pointer_is_valid optnone
 define hidden void @task1() #1 {
-  %1 = alloca i32, align 4
-  %2 = load i32, ptr @m, align 4
-  %3 = icmp ne i32 %2, 0
-  br i1 %3, label %4, label %6
-
-4:                                                ; preds = %0
-  %5 = load i32, ptr @m, align 4
-  store i32 %5, ptr %1, align 4
-  br label %6
-
-6:                                                ; preds = %4, %0
   ret void
 }
 
 ; Function Attrs: noinline nounwind null_pointer_is_valid optnone
 define hidden void @task2() #1 {
-  %1 = alloca i32, align 4
-  %2 = load i32, ptr @m, align 4
-  %3 = icmp ne i32 %2, 0
-  br i1 %3, label %4, label %6
+  ret void
+}
 
-4:                                                ; preds = %0
-  %5 = load i32, ptr @m, align 4
-  store i32 %5, ptr %1, align 4
-  br label %6
+; Function Attrs: noinline nounwind null_pointer_is_valid optnone
+define hidden void @notTask1() #1 {
+  %1 = load i32, ptr @m, align 4
+  %2 = add nsw i32 %1, -1
+  store i32 %2, ptr @m, align 4
+  ret void
+}
 
-6:                                                ; preds = %4, %0
+; Function Attrs: noinline nounwind null_pointer_is_valid optnone
+define hidden void @notTask2() #1 {
+  %1 = load i32, ptr @m, align 4
+  %2 = add nsw i32 %1, -1
+  store i32 %2, ptr @m, align 4
   ret void
 }
 
@@ -43,6 +37,8 @@ define hidden i32 @main() #1 {
   store i32 0, ptr %1, align 4
   %2 = call i32 @OS_AddThread(ptr noundef @task1, i32 noundef 128, i32 noundef 1)
   %3 = call i32 @OS_AddThread(ptr noundef @task2, i32 noundef 128, i32 noundef 1)
+  call void @notTask1()
+  call void @notTask2()
   br label %4
 
 4:                                                ; preds = %0, %4

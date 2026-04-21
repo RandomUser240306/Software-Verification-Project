@@ -52,16 +52,16 @@ public class Accesses {
         for(int i=0; i<nodes.size(); i++) {
             if(nodes.get(i).contains("#data")) {
                 possibleAccesses.put(nodes.get(i), new HashMap<String, Integer>());
-                 System.out.println("Memory Location: " + nodes.get(i).substring(5));
-                 System.out.println("Starting Points:");
+                //  System.out.println("Memory Location: " + nodes.get(i).substring(5));
+                //  System.out.println("Starting Points:");
                 for(String startingPoint : graph.startingPoints) {
                     int j = nodes.indexOf(startingPoint);
                     if(j<0) continue;
                     if(reachableLocations.get(j).get(i)>0) {
-                        if(reachableLocations.get(j).get(i)==1)
-                            System.out.println("\t" + nodes.get(j) + " - Read");
-                        else 
-                            System.out.println("\t" + nodes.get(j) + " - Write");
+                        // if(reachableLocations.get(j).get(i)==1)
+                            // System.out.println("\t" + nodes.get(j) + " - Read");
+                        // else 
+                            // System.out.println("\t" + nodes.get(j) + " - Write");
                         possibleAccesses.get(nodes.get(i)).put(startingPoint, reachableLocations.get(j).get(i));
                     }
                 }
