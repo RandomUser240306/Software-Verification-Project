@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Map;
+import java.util.Set;
 
 public class Accesses {
     public static Map<String, Map<String, Integer>> getAccesses() throws FileNotFoundException {
         CallGraph graph = Parser.parseLLVM();
-        CallGraph osGraph = Parser.parseLLVM();
-        graph.startingPoints.addAll(osGraph.startingPoints);
-        graph.references.addAll(osGraph.references);
         List<Edge> edges = graph.references;
         //Get ordered list of nodes
         Set<String> n = new HashSet<>();
